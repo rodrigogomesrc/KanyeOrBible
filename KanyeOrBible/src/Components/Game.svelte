@@ -1,6 +1,9 @@
 <script>
     import { onMount } from 'svelte';
+    import {ranking} from '../Services/ranking'
     import { getKanyeSentence, getBibleSentence } from '../Services/api';
+import About from './About.svelte';
+import Ranking from './Ranking.svelte';
     let questionsAmount = 10
     let currentStatementIndex = 0
     let rights = 0
@@ -43,6 +46,19 @@
         console.log(rights)
         console.log((new Date().getTime())-startTime)
         console.log("score: "+score)
+        updateRanking(score)
+
+    }
+    function updateRanking(score){
+        let localRanking = [...$ranking, {player:'Test',score: score}]
+        for (let i = localRanking.length-1; i > 0; i--) {
+            if(localRanking[i].score > localRanking[i-1].score){
+                [localRanking[i],localRanking[i-1]] = [localRanking[i-1], localRanking[i]]
+            }
+        }
+        localRanking.pop()
+        ranking.set(localRanking)
+        console.log($ranking)
     }
 </script>
 
