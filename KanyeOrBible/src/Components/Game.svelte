@@ -1,30 +1,62 @@
 <script>
+    import { onMount } from 'svelte';
     import { getKanyeSentence, getBibleSentence } from '../Services/api';
-
-    let statement = "Statement";
-	/*
-	getBibleSentence(function(data){
-		console.log(data);
-	})
-
-	getKanyeSentence(function(data){
-		console.log("api do kanye chamada");
-	})
-	*/
-
-    function onVote(option){
-        console.log(option);
+    let questionsAmount = 10
+    let currentStatementIndex = 0
+    let rights = 0
+    let statement = [{author:'start',sentence:'Press start to play'}]
+    let gameStart = false
+    let startTime
+	onMount(()=>{
+        for (let index = 0; index < questionsAmount; index++) {
+            if(Math.random() < 0.5){
+                getKanyeSentence(function(data){
+		            statement.push({author:'kanye', sentence:data})
+	            })
+            }
+            else{
+                getBibleSentence(function(data){
+		            statement.push({author:'bible', sentence:data})
+	            })
+            }
+            
+        }
+        console.log(statement)
+    })
+	function onVote(option){
+        if(statement[currentStatementIndex].author === option){
+            rights++
+        }
+        if(currentStatementIndex == questionsAmount){
+            endGame()
+        }else{
+            currentStatementIndex++
+        }
     }
-
+    function startGame(){
+        gameStart = true
+        startTime = new Date().getTime()
+        currentStatementIndex++
+    }
+    function endGame(){
+        let score = (100000/((new Date().getTime())-startTime))*rights
+        console.log(rights)
+        console.log((new Date().getTime())-startTime)
+        console.log("score: "+score)
+    }
 </script>
 
 <div class="container">
     <div>
-        <h2 class="statement">{statement}</h2>
+        <h2 class="statement">{statement[currentStatementIndex].sentence}</h2>
     </div>
     <div class="button-container">
+        {#if gameStart === false}
+        <button on:click={startGame}>Start</button>
+        {:else}
         <button on:click={()=>onVote("bible")}>Bible</button>
         <button on:click={()=>onVote("kanye")}>Kanye</button>
+        {/if}
     </div>
 </div>
 
