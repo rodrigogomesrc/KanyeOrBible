@@ -1,9 +1,7 @@
 <script>
     import { onMount } from 'svelte';
-    import {ranking} from '../Services/ranking'
+    import { ranking } from '../Data/ranking';
     import { getKanyeSentence, getBibleSentence } from '../Services/api';
-    import About from './About.svelte';
-    import Ranking from './Ranking.svelte';
     let questionsAmount = 10
     let currentStatementIndex = 0
     let rights = 0
@@ -64,7 +62,7 @@
 
 <div class="container">
     <div>
-        <h2 class="statement">{statement[currentStatementIndex].sentence}</h2>
+        <h2 class="center-text">{statement[currentStatementIndex].sentence}</h2>
     </div>
     <div class="button-container">
         {#if gameStart === false}
@@ -75,26 +73,3 @@
         {/if}
     </div>
 </div>
-
-<style>
-    .container{
-        width: 700px;
-        margin: 0 auto;
-        padding: 20px;
-    }
-
-    .statement {
-        text-align: center;
-    }
-
-    .button-container {
-        display: flex;
-        justify-content: center;
-    }
-
-    button {
-        margin: 5px;
-        width: 100px;
-    }
-
-</style>

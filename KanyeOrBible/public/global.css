@@ -44,12 +44,6 @@ input:disabled {
 	color: #ccc;
 }
 
-button {
-	color: #333;
-	background-color: #f4f4f4;
-	outline: none;
-}
-
 button:disabled {
 	color: #999;
 }
@@ -58,6 +52,37 @@ button:not(:disabled):active {
 	background-color: #ddd;
 }
 
+.container{
+	width: 700px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.center-text {
+	text-align: center;
+}
+
+.button-container {
+	display: flex;
+	justify-content: center;
+}
+
+button {
+	margin: 5px;
+	color: #333;
+	background-color: #f4f4f4;
+	outline: none;
+	min-width: 150px;
+}
+
 button:focus {
 	border-color: #666;
+}
+
+.text-highlight {
+	font-weight: bold;
+}
+
+.spacing{
+	margin-top: 20px;
 }
