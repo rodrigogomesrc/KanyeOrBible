@@ -2,8 +2,8 @@
     import { onMount } from 'svelte';
     import {ranking} from '../Services/ranking'
     import { getKanyeSentence, getBibleSentence } from '../Services/api';
-import About from './About.svelte';
-import Ranking from './Ranking.svelte';
+    import About from './About.svelte';
+    import Ranking from './Ranking.svelte';
     let questionsAmount = 10
     let currentStatementIndex = 0
     let rights = 0
@@ -79,9 +79,7 @@ import Ranking from './Ranking.svelte';
 <style>
     .container{
         width: 700px;
-        border: 1px solid black;
         margin: 0 auto;
-        background-color: aliceblue;
         padding: 20px;
     }
 
