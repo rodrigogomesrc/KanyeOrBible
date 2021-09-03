@@ -39,25 +39,22 @@
         startTime = new Date().getTime()
         currentStatementIndex++
     }
+
     function endGame(){
-        let score = (100000/((new Date().getTime())-startTime))*rights
+        let localScore = (100000/((new Date().getTime())-startTime))*rights
         console.log(rights)
         console.log((new Date().getTime())-startTime)
-        console.log("score: "+score)
-        updateRanking(score)
+        console.log("score: "+ localScore)
 
-    }
-    function updateRanking(score){
-        let localRanking = [...$ranking, {player:'Test',score: score}]
-        for (let i = localRanking.length-1; i > 0; i--) {
-            if(localRanking[i].score > localRanking[i-1].score){
-                [localRanking[i],localRanking[i-1]] = [localRanking[i-1], localRanking[i]]
-            }
-        }
-        localRanking.pop()
+        let localRanking = [...$ranking, {player: "Unknown", score: localScore}]
         ranking.set(localRanking)
-        console.log($ranking)
+        goToScore();
     }
+
+    function goToScore(){
+        window.location.replace("/#/score");
+    }
+   
 </script>
 
 <div class="container">

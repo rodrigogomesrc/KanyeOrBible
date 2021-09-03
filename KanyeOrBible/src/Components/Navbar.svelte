@@ -25,7 +25,6 @@
     }
 
     .navlink:hover {
-        font-weight: bold;
         color: #4cb1ef;
     }
 
