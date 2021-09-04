@@ -36,12 +36,13 @@
     }
     function startGame(){
         gameStart = true
-        startTime = new Date().getTime()
-        currentStatementIndex++
+        startTime = new Date().getTime();
+        currentStatementIndex++;
     }
 
     function endGame(){
         let localScore = (100000/((new Date().getTime())-startTime))*rights
+        localScore = Math.round(localScore * 100) / 100
         console.log(rights)
         console.log((new Date().getTime())-startTime)
         console.log("score: "+ localScore)

@@ -64,15 +64,14 @@ button:not(:disabled):active {
 	position: relative;
 }
 .center-container{
-
 	position: absolute;
   	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 600px;
 	padding: 20px;
-	background-color: #2979FF;
-	border-radius: 6px;
+	background-color: #503a65;
+	border-radius: 10px;
 	color: white
 }
 
@@ -104,7 +103,7 @@ button:focus {
 }
 
 button:hover {
-	background-color: #2196F3;
+	background-color: #95adbe;
 	color: white;
 	cursor: pointer;
 }

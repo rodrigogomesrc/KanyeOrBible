@@ -10,6 +10,11 @@
             localRanking = data;
         })
 
+        //prevent from acessing the ranking before saving the ranking data
+        if(localRanking.length == 11){
+            window.location.replace("/#/score");
+        }
+
     })
 
     function getRankingLinePLayerPosition(line, index){
@@ -62,20 +67,20 @@
     }
 
     .even-line {
-        background-color: #82B1FF;
+        background-color: #574f7d;
     }
 
     .odd-line {
-        background-color: #448AFF
+        background-color: #95adbe;
     }
 
     .ranking-score {
         text-align: left;
-        flex: 1;
+        flex: 2;
     }
 
     .ranking-name {
-        flex: 3;
+        flex: 5;
     }
 
 </style>

@@ -1,21 +1,35 @@
 <script>
-
     import { ranking } from '../Data/ranking';
     import { onMount } from 'svelte';
 
     let toSubmmit = true;
     let score;
+    let ready = false;
+    let isRankingUpdated = false;
 
     onMount(()=>{
-        score = $ranking[10].score;
+
+        try {
+            score = $ranking[10].score;
+            ready = true;
+
+        } catch(e){
+            // prevent from acessing the score before one is available
+            goToNewGame();
+        }
     })
 
     function goToNewGame(){
+        if(!isRankingUpdated){
+            updateRanking("Unknown");
+        }
         window.location.replace("/");
-
     }
 
     function goToRanking(){
+        if(!isRankingUpdated){
+            updateRanking("Unknown");
+        }
         window.location.replace("/#/ranking");
     }
 
@@ -26,6 +40,7 @@
     }
 
     function updateRanking(name){
+
         let localRanking = [...$ranking]
         localRanking[10].player = name;
         for (let i = localRanking.length-1; i > 0; i--) {
@@ -35,11 +50,12 @@
         }
         localRanking.pop()
         ranking.set(localRanking)
-        console.log($ranking)
+        isRankingUpdated = true;
     }
 
 </script>
 
+{#if ready}
 <div class="container">
     <div class="center-container">
         <div>
@@ -62,6 +78,7 @@
         </div>
     </div>
 </div>
+{/if}
 
 <style>
 
