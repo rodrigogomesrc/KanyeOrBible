@@ -13,8 +13,7 @@
 <style>
 
     .navbar {
-        background-color: black;
-        margin-bottom: 10px;
+        background-color: #0D47A1;
         padding: 20px;
     }
 
@@ -25,7 +24,7 @@
     }
 
     .navlink:hover {
-        color: #4cb1ef;
+        color: #42A5F5;
     }
 
     .nav-container {

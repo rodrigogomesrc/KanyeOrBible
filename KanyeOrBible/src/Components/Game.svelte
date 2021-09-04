@@ -58,15 +58,26 @@
 </script>
 
 <div class="container">
-    <div>
-        <h2 class="center-text">{statement[currentStatementIndex].sentence}</h2>
-    </div>
-    <div class="button-container">
-        {#if gameStart === false}
-        <button on:click={startGame}>Start</button>
-        {:else}
-        <button on:click={()=>onVote("bible")}>Bible</button>
-        <button on:click={()=>onVote("kanye")}>Kanye</button>
-        {/if}
+    <div class="center-container" id="game-screen">
+        <div>
+            <h2 class="center-text">{statement[currentStatementIndex].sentence}</h2>
+        </div>
+        <div class="button-container">
+            {#if gameStart === false}
+            <button on:click={startGame}>Start</button>
+            {:else}
+            <button on:click={()=>onVote("bible")}>Bible</button>
+            <button on:click={()=>onVote("kanye")}>Kanye</button>
+            {/if}
+        </div>
     </div>
 </div>
+
+<style>
+
+    #game-screen {
+        padding: 200px 20px;
+        max-height: 500px;
+    }
+
+</style>
