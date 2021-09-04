@@ -86,3 +86,7 @@ button:focus {
 .spacing{
 	margin-top: 20px;
 }
+
+.highlighted-text {
+	font-size: 30px;
+}
