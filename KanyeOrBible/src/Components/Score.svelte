@@ -1,21 +1,35 @@
 <script>
-
     import { ranking } from '../Data/ranking';
     import { onMount } from 'svelte';
 
     let toSubmmit = true;
     let score;
+    let ready = false;
+    let isRankingUpdated = false;
 
     onMount(()=>{
-        score = $ranking[10].score;
+
+        try {
+            score = $ranking[10].score;
+            ready = true;
+
+        } catch(e){
+            // prevent from acessing the score before one is available
+            goToNewGame();
+        }
     })
 
     function goToNewGame(){
+        if(!isRankingUpdated){
+            updateRanking("Unknown");
+        }
         window.location.replace("/");
-
     }
 
     function goToRanking(){
+        if(!isRankingUpdated){
+            updateRanking("Unknown");
+        }
         window.location.replace("/#/ranking");
     }
 
@@ -26,6 +40,7 @@
     }
 
     function updateRanking(name){
+
         let localRanking = [...$ranking]
         localRanking[10].player = name;
         for (let i = localRanking.length-1; i > 0; i--) {
@@ -35,33 +50,35 @@
         }
         localRanking.pop()
         ranking.set(localRanking)
-        console.log($ranking)
+        isRankingUpdated = true;
     }
 
 </script>
 
+{#if ready}
 <div class="container">
-
-    <div>
-        <h2 class="center-text highlighted-text">Game Finished</h2>
-    </div>
-    <div>
-        <p class="center-text score-text"><span class="text-highlight">Your score: </span>{score}</p>
-    </div>
-    {#if toSubmmit}
-        <div class="button-container spacing">
-            <input type="text" placeholder="Enter your name" id="player-name"/>
+    <div class="center-container">
+        <div>
+            <h2 class="center-text highlighted-text">Game Finished</h2>
         </div>
-        <div class="button-container">
-            <button on:click={()=>saveName()}>Save</button>
+        <div>
+            <p class="center-text score-text"><span class="text-highlight">Your score: </span>{score}</p>
         </div>
-    {/if}
-    <div class="button-container  spacing">
-        <button on:click={()=>goToRanking()}>Ranking</button>
-        <button on:click={()=>goToNewGame()}>New Game</button>
+        {#if toSubmmit}
+            <div class="button-container spacing">
+                <input type="text" placeholder="Enter your name" id="player-name"/>
+            </div>
+            <div class="button-container">
+                <button class="buttons" on:click={()=>saveName()}>Save</button>
+            </div>
+        {/if}
+        <div class="button-container  spacing">
+            <button on:click={()=>goToRanking()}>Ranking</button>
+            <button on:click={()=>goToNewGame()}>New Game</button>
+        </div>
     </div>
-
 </div>
+{/if}
 
 <style>
 

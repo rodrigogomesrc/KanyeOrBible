@@ -36,12 +36,13 @@
     }
     function startGame(){
         gameStart = true
-        startTime = new Date().getTime()
-        currentStatementIndex++
+        startTime = new Date().getTime();
+        currentStatementIndex++;
     }
 
     function endGame(){
         let localScore = (100000/((new Date().getTime())-startTime))*rights
+        localScore = Math.round(localScore * 100) / 100
         console.log(rights)
         console.log((new Date().getTime())-startTime)
         console.log("score: "+ localScore)
@@ -58,15 +59,26 @@
 </script>
 
 <div class="container">
-    <div>
-        <h2 class="center-text">{statement[currentStatementIndex].sentence}</h2>
-    </div>
-    <div class="button-container">
-        {#if gameStart === false}
-        <button on:click={startGame}>Start</button>
-        {:else}
-        <button on:click={()=>onVote("bible")}>Bible</button>
-        <button on:click={()=>onVote("kanye")}>Kanye</button>
-        {/if}
+    <div class="center-container" id="game-screen">
+        <div>
+            <h2 class="center-text">{statement[currentStatementIndex].sentence}</h2>
+        </div>
+        <div class="button-container">
+            {#if gameStart === false}
+            <button on:click={startGame}>Start</button>
+            {:else}
+            <button on:click={()=>onVote("bible")}>Bible</button>
+            <button on:click={()=>onVote("kanye")}>Kanye</button>
+            {/if}
+        </div>
     </div>
 </div>
+
+<style>
+
+    #game-screen {
+        padding: 200px 20px;
+        max-height: 500px;
+    }
+
+</style>
