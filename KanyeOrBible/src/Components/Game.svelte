@@ -22,7 +22,7 @@
             }
             
         }
-        console.log(statement)
+        //console.log(statement)
     })
 	function onVote(option){
         if(statement[currentStatementIndex].author === option){
@@ -41,11 +41,26 @@
     }
 
     function endGame(){
-        let localScore = (100000/((new Date().getTime())-startTime))*rights
-        localScore = Math.round(localScore * 100) / 100
-        console.log(rights)
-        console.log((new Date().getTime())-startTime)
-        console.log("score: "+ localScore)
+        let finishTime = (new Date().getTime())-startTime
+        let multiplicator = 1
+        if(finishTime < 40000){
+            multiplicator = 10
+        }else if(finishTime < 70000){
+            multiplicator = 8
+        }
+        else if(multiplicator < 90000){
+            multiplicator = 6
+        }
+        else if(multiplicator < 11000){
+            multiplicator = 4
+        }else if(multiplicator < 13000){
+            multiplicator = 2
+        }
+        let localScore = multiplicator*100*(rights/questionsAmount)
+        //localScore = Math.round(localScore * 100) / 100
+        //console.log(rights)
+        //console.log((new Date().getTime())-startTime)
+        //console.log("score: "+ localScore)
 
         let localRanking = [...$ranking, {player: "Unknown", score: localScore}]
         ranking.set(localRanking)
