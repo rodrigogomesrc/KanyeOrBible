@@ -1,6 +1,6 @@
 <script>
     import { ranking } from '../Data/ranking';
-    import { onMount } from 'svelte';
+    import { onMount, onDestroy } from 'svelte';
 
     let toSubmmit = true;
     let score;
@@ -19,17 +19,17 @@
         }
     })
 
-    function goToNewGame(){
+    onDestroy(()=> {
         if(!isRankingUpdated){
             updateRanking("Unknown");
         }
-        window.location.replace("/");
+    })
+
+    function goToNewGame(){
+        window.location.replace("/#/");
     }
 
     function goToRanking(){
-        if(!isRankingUpdated){
-            updateRanking("Unknown");
-        }
         window.location.replace("/#/ranking");
     }
 

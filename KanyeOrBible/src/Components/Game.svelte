@@ -20,9 +20,7 @@
 		            statement.push({author:'bible', sentence:data})
 	            })
             }
-            
         }
-        //console.log(statement)
     })
 	function onVote(option){
         if(statement[currentStatementIndex].author === option){
@@ -57,10 +55,6 @@
             multiplicator = 2
         }
         let localScore = multiplicator*100*(rights/questionsAmount)
-        //localScore = Math.round(localScore * 100) / 100
-        //console.log(rights)
-        //console.log((new Date().getTime())-startTime)
-        //console.log("score: "+ localScore)
 
         let localRanking = [...$ranking, {player: "Unknown", score: localScore}]
         ranking.set(localRanking)
