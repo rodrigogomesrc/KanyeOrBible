@@ -1,4 +1,4 @@
 # KanyeOrBible
 
 ### Link to test the application
-[Link](kanyeorbible.netlify.app)
+[kanyeorbible.netlify.app](https://kanyeorbible.netlify.app)
